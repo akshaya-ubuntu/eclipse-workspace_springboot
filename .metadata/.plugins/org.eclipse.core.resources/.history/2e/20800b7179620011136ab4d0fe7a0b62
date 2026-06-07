@@ -1,0 +1,5 @@
+package com.example.studentdemo.exception;
+
+public class StudentNotFoundException {
+
+}

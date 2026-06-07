@@ -1,0 +1,40 @@
+package com.example.studentdemo.service;
+
+import com.example.studentdemo.dao.StudentDao;
+import com.example.studentdemo.entity.Student;
+import org.springframework.stereotype.Service;
+import com.example.studentdemo.exception.StudentNotFoundException;
+import java.util.List;
+
+@Service
+public class StudentServiceImpl implements StudentService {
+
+    private final StudentDao studentDao;
+
+    public StudentServiceImpl(StudentDao studentDao) {
+        this.studentDao = studentDao;
+    }
+
+    @Override
+    public Student save(Student student) {
+        return studentDao.save(student);
+    }
+
+    @Override
+    public Student findById(Long id) {
+
+        return studentDao.findById(id)
+                .orElseThrow(() ->
+                        new StudentNotFoundException(id));
+    }
+
+    @Override
+    public List<Student> findAll() {
+        return studentDao.findAll();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        studentDao.deleteById(id);
+    }
+}
